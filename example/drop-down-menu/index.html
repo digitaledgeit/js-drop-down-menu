@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Drop Down Menu</title>
+    <link rel="stylesheet" href="../build/build.css"/>
+    <link rel="stylesheet" href="css/mega.css"/>
+    <style>
+
+        .trigger:after {
+            content: "Open menu";
+        }
+
+        .trigger.is-open:after {
+            content: "Close menu";
+        }
+
+        @media (min-width: 0px) {
+
+            .menu {
+                background-color: #ccc;
+            }
+
+            .menu .menu__item {
+                padding: 0 1em;
+                cursor: pointer;
+                color: #fff;
+                font-family: sans-serif;
+                line-height: 3em;
+            }
+
+            .menu > .menu__item > a:hover {
+                text-shadow: #000 1px 1px;
+            }
+
+            .menu--child {
+                background-color: #6D9FFF;
+            }
+
+            .menu--child .menu__item {
+                line-height: 2em;
+            }
+
+        }
+
+        @media (min-width: 536px) {
+
+        }
+
+    </style>
+</head>
+<body>
+
+    <button class="trigger js-trigger"></button>
+
+    <ul class="menu menu--parent js-menu">
+        <li class="menu__item js-item"><a class="menu__link js-link">Home</a></li>
+        <li class="menu__item js-item"><a class="menu__link js-link">About</a></li>
+        <li class="menu__item js-item">
+            <a class="menu__link js-link">Shop</a>
+            <ul class="menu menu--child menu--mega js-menu">
+                <li class="menu__item js-item">
+                    <a class="menu__link js-link">By Occasion</a>
+                    <ul class="menu menu--child js-menu">
+                        <li class="menu__item js-item"><a class="menu__link js-link">Mother's Day</a></li>
+                        <li class="menu__item js-item"><a class="menu__link js-link">Valentine's Day</a></li>
+                    </ul>
+                </li>
+                <li class="menu__item js-item">
+                    <a class="menu__link js-link">By Price</a>
+                    <ul class="menu menu--child js-menu">
+                        <li class="menu__item js-item"><a class="menu__link js-link">$50</a></li>
+                        <li class="menu__item js-item"><a class="menu__link js-link">$75</a></li>
+                    </ul>
+                </li>
+                <li class="menu__item js-item"><a class="menu__link js-link">Kathy's Creations</a></li>
+            </ul>
+        </li>
+        <li class="menu__item js-item"><a class="menu__link js-link">Contact</a></li>
+    </ul>
+
+    <script src="../build/build.js"></script>
+    <script>
+
+        var Menu = require('drop-down-menu');
+        var menu = new Menu({
+
+            el:       document.querySelector('.js-menu'),
+            trigger:  document.querySelector('.js-trigger'),
+
+            shouldToggleTheChildMenu: function(item) {
+                return window.innerWidth > 568; //only toggle the child menu when on a larger device
+            }
+
+        });
+
+        menu.open();
+
+    </script>
+</body>
+</html>

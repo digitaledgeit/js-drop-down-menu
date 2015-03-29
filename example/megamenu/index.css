@@ -1,0 +1,89 @@
+
+/** === Trigger === */
+
+.trigger:after {
+	content: "Open menu";
+}
+
+.trigger.is-open:after {
+	content: "Close menu";
+}
+
+/** === Colours === */
+
+.menu {
+	background-color: #ccc;
+}
+
+.menu .menu__item {
+	padding: 0 1em;
+	cursor: pointer;
+	color: #fff;
+	font-family: sans-serif;
+	line-height: 3em;
+}
+
+.menu > .menu__item > a:hover {
+	text-shadow: #000 1px 1px;
+}
+
+.menu--child {
+	background-color: #6D9FFF;
+}
+
+.menu--child .menu__item {
+	line-height: 2em;
+}
+
+/** === Structure === */
+
+.menu--parent.is-open {
+	display: block; /* parent is only visible when open */
+}
+
+.menu {
+	margin: 0;
+	padding: 0;
+	list-style-type: none;
+}
+
+.menu--parent,
+.menu--mega {
+	display: none;
+}
+
+@media (min-width: 0em) {
+
+}
+
+@media (min-width: 35.5em) {
+
+	.menu--parent {
+		position: relative;
+		display: block; /* parent is always visible on tablet/desktop */
+	}
+
+	.menu--mega {
+		position: absolute;
+		left: 0;
+		right: 0;
+		top: 100%;
+	}
+
+	/* too many styles for a generic component? */
+	.menu--mega.is-open {
+		display: block; /* child is only visible when open and in desktop resolution */
+	}
+
+	/* display the parent menu in a horizontal list */
+	.menu--parent > .menu__item {
+		display: inline-block;
+		vertical-align: top;
+	}
+
+	.menu--parent > .menu__item > .menu--mega > .menu__item {
+		display: inline-block;
+		vertical-align: top;
+	}
+
+}
