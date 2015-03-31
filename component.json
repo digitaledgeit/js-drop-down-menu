@@ -1,10 +1,6 @@
 {
   "name": "drop-down-menu",
-  "scripts": [
-    "index.js",
-    "lib/Menu.js",
-    "lib/MenuItem.js"
-  ],
+  "scripts": ["index.js"],
   "dependencies": {
     "component/emitter": "^1.2.0"
   }

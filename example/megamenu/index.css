@@ -68,11 +68,18 @@
 		left: 0;
 		right: 0;
 		top: 100%;
+		display: block;
+		opacity: 0;
+		transform: translateY(-5px);
+		visibility: hidden;
+		transition: all 0.3s ease-out;
 	}
 
 	/* too many styles for a generic component? */
 	.menu--mega.is-open {
-		display: block; /* child is only visible when open and in desktop resolution */
+		opacity: 1;
+		transform: translateY(0px);
+		visibility: visible; /* child is only visible when open and in desktop resolution */
 	}
 
 	/* display the parent menu in a horizontal list */
