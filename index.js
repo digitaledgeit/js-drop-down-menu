@@ -20,8 +20,9 @@ function Menu(options) {
 	if (this.trigger) {
 
 		//toggle the menu when the trigger is clicked
-		this.trigger.addEventListener('click', function() {
+		this.trigger.addEventListener('click', function(event) {
 			if (options.canBeToggled(self)) {
+				event.preventDefault();
 				self.toggle();
 			}
 		});
