@@ -1,0 +1,19 @@
+{
+  "name": "digitaledgeit-drop-down-menu",
+  "version": "0.1.0",
+  "description": "A responsive drop-down-menu.",
+  "author": {
+    "name": "James Newell"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/digitaledgeit/js-drop-down-menu.git"
+  },
+  "bugs": {
+    "url": "https://github.com/digitaledgeit/js-drop-down-menu/issues"
+  },
+  "dependencies": {
+    "component-emitter": "^1.2.0"
+  },
+  "license": "MIT"
+}
