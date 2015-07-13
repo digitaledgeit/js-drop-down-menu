@@ -139,7 +139,7 @@ Menu.prototype.getChildren = function() {
  * @param event
  */
 Menu.prototype.onClickTrigger = function(event) {
-  if (this.canBeToggled(self)) {
+  if (this.canBeToggled(this)) {
     event.preventDefault();
     this.toggle();
   }
