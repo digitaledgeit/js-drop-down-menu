@@ -9,7 +9,7 @@ var emitter = require('component-emitter');
  */
 function Menu(options) {
 	var self = this;
-	options.canBeToggled = options.canBeToggled || function(menu) {return true};
+	this.canBeToggled = options.canBeToggled || function(menu) {return true};
 
 	/** @private */
 	this.el = options.el;
@@ -19,13 +19,11 @@ function Menu(options) {
 
 	if (this.trigger) {
 
-		//toggle the menu when the trigger is clicked
-		this.trigger.addEventListener('click', function(event) {
-			if (options.canBeToggled(self)) {
-				event.preventDefault();
-				self.toggle();
-			}
-		});
+    this.onClickTrigger = this.onClickTrigger.bind(this);
+    this.onClickOutside = this.onClickOutside.bind(this);
+
+    //toggle the menu when the trigger is clicked
+    this.trigger.addEventListener('click', this.onClickTrigger);
 
 		//toggle the classes on the trigger when the menu is opened or closed
 		this
@@ -62,7 +60,7 @@ function Menu(options) {
 					var menu = new Menu({
 						el:           menuElement,
 						trigger:      triggerElement,
-						canBeToggled: options.canBeToggled
+						canBeToggled: self.canBeToggled
 					});
 
 					self.children.push(menu);
@@ -94,6 +92,13 @@ Menu.prototype.isOpen = function() {
 Menu.prototype.open = function() {
 	this.el.classList.add('is-open');
 	this.emit('opened');
+
+  //let the menu be opened
+  var self = this;
+  setTimeout(function() {
+    document.documentElement.addEventListener('click', self.onClickOutside);
+  }, 0);
+
 	return this;
 };
 
@@ -102,6 +107,7 @@ Menu.prototype.open = function() {
  * @returns {Menu}
  */
 Menu.prototype.close = function() {
+  document.documentElement.removeEventListener('click', this.onClickOutside);
 	this.el.classList.remove('is-open');
 	this.emit('closed');
 	return this;
@@ -126,6 +132,27 @@ Menu.prototype.toggle = function() {
  */
 Menu.prototype.getChildren = function() {
 	return this.children;
+};
+
+/**
+ * Toggle the menu when the user clicks the trigger
+ * @param event
+ */
+Menu.prototype.onClickTrigger = function(event) {
+  if (this.canBeToggled(self)) {
+    event.preventDefault();
+    this.toggle();
+  }
+};
+
+/**
+ * Close the menu when the user clicks outside of the menu
+ * @param event
+ */
+Menu.prototype.onClickOutside = function(event) {
+  if (!this.el.contains(event.target) && this.isOpen()) {
+    this.close();
+  }
 };
 
 /**
